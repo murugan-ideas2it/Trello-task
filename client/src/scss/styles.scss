@@ -1,0 +1,39 @@
+// styles.scss
+body{
+  width:$width-100;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin:auto;
+  background-color: $app-background;
+  @include font-style(#333333, 400,1.6, 14px);
+}
+.width20{
+ width: $width-20; 
+}
+.width100{width: $width-100; 
+}
+.float-left{
+  float:left;
+}
+.float-right{
+  float:right;
+}
+.container-box{
+  width: 100%;
+  margin: auto;
+}
+
+.column1, .column2, .column3, .column4 {
+  width: 23%;
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+  background: #fff;
+  margin: 10px;
+  float: left;
+}
+.column1-inner, .column2-inner, .column3-inner, .column4-inner {
+   min-height: 500px;
+}
+.column1-header, .column2-header, .column3-header, .column4-header{min-height:100px;}
+.column1-body, .column2-body, .column3-body, .column4-body{min-height:400px;}
+#add_task{position:absolute;}

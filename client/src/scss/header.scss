@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+
+.header{
+  width:100%;
+  display:block;
+  background-color:$header-background;
+  overflow: hidden;
+  margin-bottom:20px;
+  h1{
+    text-align:center;
+  }
+}

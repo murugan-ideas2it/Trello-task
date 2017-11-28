@@ -1,0 +1,20 @@
+//Mixins
+@mixin custom-btn($color, $border, $border-radius,$background, $padding) {
+    background: $background;
+    border-radius: $border-radius;
+    border: 1px solid $border !important;
+    color: $color;
+    padding: $padding;
+    text-decoration:none;
+}
+@mixin font-style($color, $font-weight, $line-height, $font-size){
+    color: $color;
+    font-weight:$font-weight;
+    line-height:$line-height;   
+    font-size:$font-size;
+}
+@mixin fullwidth-center($width_value, $margin_value, $align_value){
+    width: $width_value;
+    margin: $margin_value;
+    text-align:$align_value;
+}

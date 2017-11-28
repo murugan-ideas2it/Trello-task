@@ -1,0 +1,16 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+@import './variables.scss';
+
+
+.footer{
+  width:100%;
+  display:block;
+  background-color:$header-background;
+  overflow: hidden;
+  margin-top:20px;
+  p{
+    text-align:center;
+  }
+}
