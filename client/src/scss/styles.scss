@@ -20,6 +20,7 @@ body{
 .container-box{
   width: 100%;
   margin: auto;
+  display:flex;
 }
 
 .column1, .column2, .column3, .column4 {
@@ -27,13 +28,156 @@ body{
   display: inline-block;
   margin: auto;
   text-align: center;
-  background: #fff;
+  background: #e1e3e5;
   margin: 10px;
   float: left;
+  border-radius: 30px;
 }
 .column1-inner, .column2-inner, .column3-inner, .column4-inner {
    min-height: 500px;
 }
 .column1-header, .column2-header, .column3-header, .column4-header{min-height:100px;}
 .column1-body, .column2-body, .column3-body, .column4-body{min-height:400px;}
-#add_task{position:absolute;}
+#add_task {
+    position: relative;
+    float: right;
+    display: block;
+    margin: 20px;
+   i {
+      padding: 5px;
+   }
+}
+
+
+.task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10 {
+  background: #ffffff;
+border-radius: 10px;
+padding: 10px 20px;
+margin: 15px 20px;
+}
+#task-name{
+  display: block;
+  position: relative;
+  margin: 10px auto;
+  padding: 7px;
+}
+#task-desc{
+  margin: 10px auto;
+  display: block;
+  position: relative;
+  width: 44%;
+  height: 60px;
+}
+#task-form-button{
+  display: block;
+  color: #ffffff;
+  border-radius: 7px;
+  padding: 8px 19px;
+  margin: 10px auto;
+}
+
+.column4-body{
+  .task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10 {
+      background: green;
+     color: #ffffff;
+    }
+}
+.task-label {
+    font-weight: bold;
+}
+#task-assignee{
+  margin: auto;
+  display: block;
+  width: 44%;
+  padding: 5px 10px;
+  text-align: center;
+}
+#task-assigner{@extend #task-assignee;}
+button {
+    padding: 5px 10px;
+    background: #5bac46;
+    box-shadow: unset;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: 1px 5px;
+    cursor:pointer;
+}
+.task-form-label{
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+.task-name-div{
+  text-align:center;
+}
+/*.task-desc-div{@extend .task-name-div;}
+.task-assignee-div{@extend .task-name-div;}
+.task-assigner-div{@extend .task-name-div;}
+*/
+.edit-task {
+    position: relative;
+    display: inline-block;
+    float: right;
+    color: #007abc;
+    cursor: pointer;
+}
+.column4-body .edit-task{color:#ffffff;}
+
+/* mPopup box style */
+.mpopup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.mpopup-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    border-radius: 20px;
+}
+
+.mpopup-head {
+    padding: 2px 16px;
+    background-color: #007abc;
+    color: white;
+    border-top-left-radius:20px;
+    border-top-right-radius:20px;
+}
+.mpopup-main {padding: 2px 16px;}
+/* add animation effects */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+/* close button style */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
