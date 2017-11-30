@@ -15,10 +15,10 @@ function write_localstorage(){
 	User[5] = {id: 6,username: 'Mani'}
 	User[6] = {id: 7,username: 'Lokesh'}
 	User[7] = {id: 8,username: 'John'}
-	TaskList[0] = {id:1, task_name:'test task1', assignee: User[1],start_date:'20/01/2017', status: 'Initial', description: 'test description', comment: 'testcomment',assigner:User[0] };
-	TaskList[1] = {id:2, task_name:'task2', assignee: User[2],start_date:'25/01/2017', status: 'Dev', description: 'task2 description', comment: 'task2 comment', assigner: User[0]};
-	localStorage.setItem('Tasks',JSON.stringify(TaskList)); 
-	localStorage.setItem('Users',JSON.stringify(User)); 
+	TaskList[0] = {id:1, task_name:'test task1', assignee: User[1],start_date:'20/01/2017', status: 'Initial', description: 'test description', comments: {'id':1,'comment': 'test1 comment','commented-date': '22/02/2017 11:11:11'},assigner:User[0] };
+	// TaskList[1] = {id:2, task_name:'task2', assignee: User[2],start_date:'25/01/2017', status: 'Dev', description: 'task2 description', comments: {'id':2,'comment': 'test2 comment','commented-date': '20/08/2017 12:12:121'}, assigner: User[0]};
+	// localStorage.setItem('Tasks',JSON.stringify(TaskList)); 
+	// localStorage.setItem('Users',JSON.stringify(User)); 
 }
 /* This method is used create overall page layout */
 function generate_layout(){
@@ -30,7 +30,7 @@ function generate_layout(){
 	var column1 = createcustomElement("div", {'class': 'column1'}, 'container-box');
 	var column1_inner = createcustomElement("div", {'class': 'column1-inner'}, 'column1');
 	var column1_header = createcustomElement("div", {'class': 'column1-header'}, 'column1-inner');
-	var column1_h2 = createcustomElement("h3", {}, 'column1-header', 'Task');
+	var column1_h2 = createcustomElement("h3", {}, 'column1-header', 'Task List');
 	// var add_task = createcustomElement("button", {'id': 'add_task'}, 'column1-header', 'Add Task');
 	var column1_body = createcustomElement("div", {'class': 'column1-body'}, 'column1-inner');
 	tasks = localStorage.getItem('Tasks');
@@ -40,7 +40,7 @@ function generate_layout(){
  			setTaskDiv(tasks[i], 'column1-body', 'Initial','task-box'+tasks[i].id);
 		}
  	}
- 	var add_task = createcustomElement("button", {'id': 'add_task'}, 'column1', 'Add Task');
+ 	var add_task = createcustomElement("button", {'id': 'add_task'}, 'column1-inner', 'Add Task');
  	var add_task_button = document.getElementById('add_task');
 	var add_icon = document.createElement('i');
 	add_icon.setAttribute('class', 'fa fa-plus')
@@ -98,6 +98,8 @@ function generate_layout(){
 	createcustomElement("textarea", {'id': 'task-desc'}, 'mpopup-main');
 	createcustomElement("select", {'id': 'task-assignee'}, 'mpopup-main');
 	createcustomElement("select", {'id': 'task-assigner'}, 'mpopup-main');
+	createcustomElement("div", {'class': 'task-comment-sec'}, 'mpopup-main');
+	createcustomElement("textarea", {'id': 'task-comment'}, 'task-comment-sec');
 	createcustomElement("button", {'id': 'task-form-button'}, 'mpopup-main', 'Save');
 	var task_form_button = document.getElementById('task-form-button');
 	task_form_button.setAttribute('onclick', "setTask()");
@@ -145,21 +147,22 @@ function assigneeValueSet(users){
 function setTaskDiv(task, divclass, status, childdivclass){
 	createcustomElement("div", {'class': childdivclass},divclass);
 
-	createcustomElement("label", {'class': 'task-label'},childdivclass,'Task Name : ');
-	createcustomElement("label", {'class': 'task'}, childdivclass, task.task_name);
+	// createcustomElement("label", {'class': 'task-label'},childdivclass,'Task Name : ');
 	createcustomElement("span", {'id': 'edit-task'+task.id},childdivclass);
+	createcustomElement("label", {'class': 'task task-name'}, childdivclass, task.task_name);
+	
 	createcustomElement("br", {}, childdivclass);
-	createcustomElement("label", {'class': 'task-label'}, childdivclass,'Description : ');
-	createcustomElement("label", {'class': 'task'}, childdivclass, task.description);
-	createcustomElement("br", {}, childdivclass);
-	createcustomElement("label", {'class': 'task-label'}, childdivclass,'Start Date : ');
-	createcustomElement("label", {'class': 'task'}, childdivclass, task.start_date);
-	createcustomElement("br", {}, childdivclass);
-	createcustomElement("label", {'class': 'task-label'}, childdivclass,'Assignee : ');
-	createcustomElement("label", {'class': 'task'}, childdivclass, task.assignee.username);
-	createcustomElement("br", {}, childdivclass);
-	createcustomElement("label", {'class': 'task-label'}, childdivclass,'Assigner : ');
-	createcustomElement("label", {'class': 'task'}, childdivclass, task.assigner.username);
+	// createcustomElement("label", {'class': 'task-label'}, childdivclass,'Description : ');
+	// createcustomElement("label", {'class': 'task'}, childdivclass, task.description);
+	// createcustomElement("br", {}, childdivclass);
+	// createcustomElement("label", {'class': 'task-label'}, childdivclass,'Start Date : ');
+	createcustomElement("label", {'class': 'task start_date'}, childdivclass, task.start_date);
+	// createcustomElement("br", {}, childdivclass);
+	// createcustomElement("label", {'class': 'task-label'}, childdivclass,'Assignee : ');
+	createcustomElement("label", {'class': 'task assignee'}, childdivclass, task.assignee.username);
+	// createcustomElement("br", {}, childdivclass);
+	// createcustomElement("label", {'class': 'task-label'}, childdivclass,'Assigner : ');
+	// createcustomElement("label", {'class': 'task'}, childdivclass, task.assigner.username);
 	createcustomElement("br", {}, childdivclass);
 	if(status == 'Initial'){
 		createcustomElement("button", {'id': 'move-to-dev-'+task.id}, childdivclass,'Move to Dev');
@@ -256,7 +259,8 @@ function createTask(){
 	var task_desc = document.getElementById('task-desc');
 		task_desc.setAttribute('placeholder', "Enter the Task Description");
 	var task_assignee = document.getElementById('task-assignee');
-	var task_assigner = document.getElementById('task-assigner');console.log(tasks);
+	var task_assigner = document.getElementById('task-assigner');
+	var task_comment = document.getElementById('task-comment');
 	task_name.value = '';
 	task_desc.value = '';
 	task_assignee.value = '';
@@ -267,6 +271,7 @@ function createTask(){
 	// get the close action element
 	var close = document.getElementsByClassName("close")[0];
     mpopup.style.display = "block";
+    task_comment.style.display = "none";
 	// close the mPopup once close element is clicked
 	close.onclick = function() {
     	mpopup.style.display = "none";
@@ -280,17 +285,30 @@ function createTask(){
 }
 /* This method is used to edit popup to prefill the form element value*/
 function editTask(taskId){
+	var task_comment = document.getElementById('task-comment');
+	task_comment.setAttribute('placeholder', "Enter your comments here");
 	tasks = localStorage.getItem('Tasks');
  	tasks = JSON.parse(tasks);
 	var task_name = document.getElementById('task-name');
 	var task_desc = document.getElementById('task-desc');
 	var task_assignee = document.getElementById('task-assignee');
-	var task_assigner = document.getElementById('task-assigner');console.log(tasks);
-	task_name.value = tasks[taskId-1].task_name;
-	task_desc.value = tasks[taskId-1].description;
-	task_assignee.value = tasks[taskId-1]['assignee'].id;
-	task_assigner.value = tasks[taskId-1]['assigner'].id;
-	console.log(tasks[taskId-1]['assignee'].id);
+	var task_assigner = document.getElementById('task-assigner');
+	task = tasks[taskId-1];
+	task_name.value = task.task_name;
+	task_desc.value = task.description;
+	task_assignee.value = task['assignee'].id;
+	task_assigner.value = task['assigner'].id;
+	// console.log(task['comments']);
+	// console.log(Object.keys(task['comments']).length);
+	// if((Object.keys(task['comments']).length) != ""){
+	// 	createcustomElement("div", {'class': 'comment-list'}, 'task-comment-sec');
+	// 	createcustomElement("ul", {'class': 'comment-ul'}, 'comment-list');
+	// 	for (var i = 0; i < (Object.keys(task['comments']).length); i++) {
+			
+	// 		createcustomElement("li", {'class': 'comment-li'}, 'comment-ul', task['comments'].comment);
+	// 	}
+	// }
+	console.log(task['comments']);
 
 	var task_form_button = document.getElementById('task-form-button');
 	task_form_button.setAttribute('onclick', "setTask('"+taskId+"')");
@@ -300,6 +318,7 @@ function editTask(taskId){
 	// get the close action element
 	var close = document.getElementsByClassName("close")[0];
     mpopup.style.display = "block";
+    task_comment.style.display = "block";
 	// close the mPopup once close element is clicked
 	close.onclick = function() {
     	mpopup.style.display = "none";
@@ -309,9 +328,7 @@ function editTask(taskId){
 	    if (event.target == mpopup) {
 	        mpopup.style.display = "none";
 	    }
-	}
-
-	
+	}	
 }
 /* This method is used to add and edit task*/
 function setTask(taskId){
@@ -319,12 +336,19 @@ function setTask(taskId){
 	var task_desc = document.getElementById('task-desc');
 	var task_assignee = document.getElementById('task-assignee');
 	var task_assigner = document.getElementById('task-assigner');
+	var task_comment = document.getElementById('task-comment');
 	var task_name_value = task_name.value;
 	var task_desc_value = task_desc.value;
 	var tasks = JSON.parse(localStorage.getItem('Tasks'));
 	var tasks = Object.keys(tasks).map(function (key) { return tasks[key]; });
 	var users = JSON.parse(localStorage.getItem('Users'));
+	var comments = [];
+	var commentObject = new Object();
+	var commentObject = Object.keys(commentObject).map(function (key) { return commentObject[key]; });
+	commentObject = {comment: task_comment.value, commented_date: getCurrentDateTime()}
 
+	console.log("*************");
+console.log(commentObject);
 	if(taskId != "" && taskId != undefined){
 		for (var i = 0; i < (Object.keys(tasks).length); i++) {
 			if(tasks[i].id == taskId){
@@ -332,6 +356,7 @@ function setTask(taskId){
 				tasks[i].description = task_desc_value;
 				tasks[i].assignee = users[task_assignee.value-1];
 				tasks[i].assigner = users[task_assigner.value-1];
+				tasks[i].comments = commentObject;console.log(tasks[i]);
 				localStorage.setItem('Tasks', JSON.stringify(tasks));
 			}
 			console.log(tasks[i]);

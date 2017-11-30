@@ -20,24 +20,28 @@ body{
 .container-box{
   width: 100%;
   margin: auto;
-  display:flex;
+  width: 100%;
+  margin: auto auto 25px;
+  display: block;
+  position: relative;
+  overflow: hidden;
 }
-
+.main{min-height:70vh;}
 .column1, .column2, .column3, .column4 {
   width: 23%;
   display: inline-block;
   margin: auto;
   text-align: center;
   background: #e1e3e5;
-  margin: 10px;
+  margin: 10px 10px 10px 12px;
   float: left;
-  border-radius: 30px;
+  border-radius: 15px;
 }
 .column1-inner, .column2-inner, .column3-inner, .column4-inner {
-   min-height: 500px;
+   min-height: 100px;
 }
-.column1-header, .column2-header, .column3-header, .column4-header{min-height:100px;}
-.column1-body, .column2-body, .column3-body, .column4-body{min-height:400px;}
+
+/*.column1-body, .column2-body, .column3-body, .column4-body{min-height:100px;}*/
 #add_task {
     position: relative;
     float: right;
@@ -52,28 +56,37 @@ body{
 .task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10 {
   background: #ffffff;
 border-radius: 10px;
-padding: 10px 20px;
+padding: 10px 10px 15px;
 margin: 15px 20px;
 }
+.font-border{
+  border-radius: 5px;
+  border: none; 
+  display: block;
+  font-size:14px;
+  position: relative;
+}
 #task-name{
-  display: block;
-  position: relative;
   margin: 10px auto;
-  padding: 7px;
+  padding: 10px 7px;
+  width: 47%;
+  @extend .font-border;
 }
-#task-desc{
+#task-desc, #task-comment{
   margin: 10px auto;
-  display: block;
-  position: relative;
-  width: 44%;
+  width: 49%;
   height: 60px;
+  @extend .font-border;
+  padding: 10px 5px;
 }
+#task-comment{display:none;}
 #task-form-button{
   display: block;
   color: #ffffff;
   border-radius: 7px;
   padding: 8px 19px;
   margin: 10px auto;
+  font-size:14px;
 }
 
 .column4-body{
@@ -86,11 +99,15 @@ margin: 15px 20px;
     font-weight: bold;
 }
 #task-assignee{
-  margin: auto;
+  margin: 10px auto;
   display: block;
-  width: 44%;
+  width: 51%;
   padding: 5px 10px;
   text-align: center;
+  border-radius: 5px;
+  border: none;
+  font-size:14px;
+  background: #fff;
 }
 #task-assigner{@extend #task-assignee;}
 button {
@@ -100,7 +117,7 @@ button {
     border: none;
     border-radius: 5px;
     color: #ffffff;
-    margin: 1px 5px;
+    margin: 10px 5px 0;
     cursor:pointer;
 }
 .task-form-label{
@@ -123,7 +140,11 @@ button {
     cursor: pointer;
 }
 .column4-body .edit-task{color:#ffffff;}
-
+.task-name{font-size:16px;}
+.start_date{float:left;color:#838c91}
+.assignee{float:right;color:#838c91}
+.column4 .start_date{color:#ffffff;}
+.column4 .assignee{float:right;color:#ffffff}
 /* mPopup box style */
 .mpopup {
     display: none;
@@ -140,7 +161,7 @@ button {
 }
 .mpopup-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: #F1F1F1;
     margin: auto;
     padding: 0;
     width: 40%;
@@ -151,7 +172,6 @@ button {
     animation-duration: 0.4s;
     border-radius: 20px;
 }
-
 .mpopup-head {
     padding: 2px 16px;
     background-color: #007abc;
