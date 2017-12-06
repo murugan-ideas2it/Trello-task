@@ -3,8 +3,8 @@ body{
   width:$width-100;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin:auto;
-  background-color: $app-background;
-  @include font-style(#333333, 400,1.6, 14px);
+  background-image: $app-bg-img;
+  @include font-style(#333333, 400,1em, 14px);
 }
 .width20{
  width: $width-20; 
@@ -17,6 +17,7 @@ body{
 .float-right{
   float:right;
 }
+.border-radius-5{border-radius:5px;}
 .container-box{
   width: 100%;
   margin: auto;
@@ -26,7 +27,7 @@ body{
   position: relative;
   overflow: hidden;
 }
-.main{min-height:70vh;}
+.main{min-height:80vh;}
 .column1, .column2, .column3, .column4 {
   width: 23%;
   display: inline-block;
@@ -35,10 +36,10 @@ body{
   background: #e1e3e5;
   margin: 10px 10px 10px 12px;
   float: left;
-  border-radius: 15px;
+  @extend .border-radius-5;
 }
 .column1-inner, .column2-inner, .column3-inner, .column4-inner {
-   min-height: 100px;
+   min-height: 60px;
 }
 
 /*.column1-body, .column2-body, .column3-body, .column4-body{min-height:100px;}*/
@@ -53,14 +54,15 @@ body{
 }
 
 
-.task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10 {
+.task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10,.task-box11,.task-box12,.task-box13,.task-box14,.task-box15,.task-box16,.task-box17 {
   background: #ffffff;
-border-radius: 10px;
+@extend .border-radius-5;
 padding: 10px 10px 15px;
-margin: 15px 20px;
+margin: 15px 15px;
+border-bottom: 1px solid #ccc;
 }
 .font-border{
-  border-radius: 5px;
+  @extend .border-radius-5;
   border: none; 
   display: block;
   font-size:14px;
@@ -71,6 +73,7 @@ margin: 15px 20px;
   padding: 10px 7px;
   width: 47%;
   @extend .font-border;
+  border:1px solid #cdd2d4;
 }
 #task-desc, #task-comment{
   margin: 10px auto;
@@ -78,22 +81,25 @@ margin: 15px 20px;
   height: 60px;
   @extend .font-border;
   padding: 10px 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.23);
+    box-shadow: 0 1px 2px rgba(0,0,0,.23);
 }
 #task-comment{display:none;}
 #task-form-button{
   display: block;
   color: #ffffff;
-  border-radius: 7px;
+  @extend .border-radius-5;
   padding: 8px 19px;
   margin: 10px auto;
   font-size:14px;
 }
 
 .column4-body{
-  .task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9, .task-box10 {
+  .task-box1, .task-box2, .task-box3, .task-box4, .task-box5, .task-box6, .task-box7, .task-box8, .task-box9,.task-box10,.task-box11,.task-box12,.task-box13,.task-box14,.task-box15,.task-box16,.task-box17  {
       background: green;
      color: #ffffff;
     }
+    .task-name{color:#ffffff;}
 }
 .task-label {
     font-weight: bold;
@@ -104,8 +110,8 @@ margin: 15px 20px;
   width: 51%;
   padding: 5px 10px;
   text-align: center;
-  border-radius: 5px;
-  border: none;
+  @extend .border-radius-5;
+  border: 1px solid #cdd2d4;
   font-size:14px;
   background: #fff;
 }
@@ -115,7 +121,7 @@ button {
     background: #5bac46;
     box-shadow: unset;
     border: none;
-    border-radius: 5px;
+    @extend .border-radius-5;
     color: #ffffff;
     margin: 10px 5px 0;
     cursor:pointer;
@@ -138,11 +144,26 @@ button {
     float: right;
     color: #007abc;
     cursor: pointer;
+    margin-left: 15px;
 }
 .column4-body .edit-task{color:#ffffff;}
-.task-name{font-size:16px;}
-.start_date{float:left;color:#838c91}
-.assignee{float:right;color:#838c91}
+.task-name{font-size:16px;display: block;text-align:left;color:#4d4d4d;}
+.start_date{
+  float:left;
+  color:#838c91;
+  font-size: 12px;
+  padding-left: 5px;
+  }
+.assignee{ 
+    float: right;
+    background: #c4e1f2;
+    height: 25px;
+    width: 25px;
+    border-radius: 13px;
+    color: orange;
+    font-weight: bold;
+    line-height: 25px;
+}
 .column4 .start_date{color:#ffffff;}
 .column4 .assignee{float:right;color:#ffffff}
 /* mPopup box style */
@@ -170,14 +191,14 @@ button {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-    border-radius: 20px;
+    @extend .border-radius-5;
 }
 .mpopup-head {
     padding: 2px 16px;
     background-color: #007abc;
     color: white;
-    border-top-left-radius:20px;
-    border-top-right-radius:20px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 }
 .mpopup-main {padding: 2px 16px;}
 /* add animation effects */
@@ -195,6 +216,8 @@ button {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    margin-right: 5px;
+    margin-top: 10px;
 }
 .close:hover, .close:focus {
     color: #000;
